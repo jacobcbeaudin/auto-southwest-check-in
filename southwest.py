@@ -14,10 +14,15 @@ CORS(app)  # Enable CORS for all routes
 
 @app.route('/checkin', methods=['POST'])
 def checkin():
-    # Example of using the existing main function
-    # You would modify this according to your application's logic
     data = request.json
-    arguments = sys.argv[1:]
+    if "confirmationNumber" in data and "firstName" in data and "lasstName" in data:
+        arguments = [data.get("confirmationNumber"), data.get("firstName"), data.get("lastName")]
+    elif "username" in data and "password" in data:
+        arguments = [data.get("username"), data.get("password"),]
+    else:
+        raise Exception(
+            'Must specify "confirmationNumber", "firstName", and "firstName" OR "username" and "password"'
+        )
     response = main(arguments)
     return jsonify(response)
 
