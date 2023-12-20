@@ -19,4 +19,7 @@ RUN cp /usr/bin/chromedriver /usr/local/lib/python3.12/site-packages/seleniumbas
 
 COPY . .
 
+# Expose port 5000 for the Flask app
+EXPOSE 5000
+
 ENTRYPOINT ["python3", "-u", "southwest.py"]
