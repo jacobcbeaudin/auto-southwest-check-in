@@ -15,13 +15,13 @@ CORS(app)  # Enable CORS for all routes
 @app.route('/checkin', methods=['POST'])
 def checkin():
     data = request.json
-    if "confirmationNumber" in data and "firstName" in data and "lasstName" in data:
+    if "confirmationNumber" in data and "firstName" in data and "lastName" in data:
         arguments = [data.get("confirmationNumber"), data.get("firstName"), data.get("lastName")]
     elif "username" in data and "password" in data:
         arguments = [data.get("username"), data.get("password"),]
     else:
         raise Exception(
-            'Must specify "confirmationNumber", "firstName", and "firstName" OR "username" and "password"'
+            'Must specify "confirmationNumber", "firstName", and "lastName" OR "username" and "password"'
         )
     response = main(arguments)
     return jsonify(response)
